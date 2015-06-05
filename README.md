@@ -19,3 +19,6 @@ Follows these style guides:
 ## Author
 İsmail Demirbilek  
 [@dbtek](https://twitter.com/dbtek)
+
+## Credits
+Thom Porter, [AngularJs Calculator Demo](http://www.thomporter.com/docco/calc.html)
