@@ -1,6 +1,8 @@
 # AngularJS Material Design Calculator
 Sample AngularJS calculator application utilising material design.
 
+![Screenshot](https://raw.githubusercontent.com/dbtek/angular-material-calculator/master/screenshot.png)
+
 ## Uses
 - Written in Coffeescript
 - Browserify, CommonJS modules
