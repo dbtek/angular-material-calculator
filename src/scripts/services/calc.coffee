@@ -1,5 +1,8 @@
 app = require '../app'
 
+###*
+ # Logic implemented in this service is a derived version of Angular Calculator Demo by Thom Porter (http://www.thomporter.com/docco/calc.html).
+###
 app.factory '$calc', ->
 
   memory = 0
