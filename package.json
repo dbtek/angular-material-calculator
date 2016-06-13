@@ -1,8 +1,8 @@
 {
-  "name": "gulp-template",
+  "name": "angular-material-calculator",
   "version": "1.0.0",
-  "description": "Floor Planner",
-  "author": "Cihan Ozcelik <cihanozcelik@gmail.com>",
+  "description": "Material Design Calculator built on Angular JS",
+  "author": "İsmail Demirbilek <ce.demirbilek@gmail.com>",
   "license": "",
   "main": "gulpfile.js",
   "scripts": {
