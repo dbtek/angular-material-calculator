@@ -1,7 +1,7 @@
 # Source: https://github.com/leonidas/gulp-project-template
 browserify   = require 'browserify'
 browserSync  = require 'browser-sync'
-chalk             = require 'chalk'
+chalk        = require 'chalk'
 CSSmin       = require 'gulp-minify-css'
 ecstatic     = require 'ecstatic'
 filter       = require 'gulp-filter'
@@ -18,6 +18,9 @@ streamify    = require 'gulp-streamify'
 stylus       = require 'gulp-stylus'
 uglify       = require 'gulp-uglify'
 watchify     = require 'watchify'
+ngAnnotate   = require 'gulp-ng-annotate'
+ghPages      = require 'gulp-gh-pages'
+pkg          = require './package.json'
 
 production   = process.env.NODE_ENV is 'production'
 
@@ -60,7 +63,9 @@ gulp.task 'scripts', ->
     .on 'error', handleError
     .pipe source config.scripts.filename
 
-  build.pipe(streamify(uglify())) if production
+  if production
+    build.pipe ngAnnotate()
+    build.pipe (streamify uglify())
 
   build
     .pipe gulp.dest config.scripts.destination
@@ -140,8 +145,19 @@ gulp.task 'watch', ->
 
   .emit 'update'
 
-gulp.task 'no-js', ['templates', 'styles', 'assets', 'bower']
-gulp.task 'build', ['scripts', 'no-js']
 # scripts and watch conflict and will produce invalid js upon first run
 # which is why the no-js task exists.
+gulp.task 'no-js', ['templates', 'styles', 'assets', 'bower']
+gulp.task 'build', ['scripts', 'no-js']
+
+gulp.task 'deployPrep', ->
+  production = true
+
+gulp.task 'deploy', ['deployPrep', 'build'], ->
+  options =
+    remoteUrl: pkg.repository.url
+
+  gulp.src ['public/**/*']
+    .pipe (ghPages options)
+
 gulp.task 'default', ['watch', 'no-js', 'server']
